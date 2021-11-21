@@ -45,9 +45,11 @@ public class DB4OUtil {
             //Register your top most Class here
             config.common().objectClass(EcoSystem.class).cascadeOnUpdate(true); // Change to the object you want to save
 
-            ObjectContainer db = Db4oEmbedded.openFile(config, FILENAME);
+            ObjectContainer db = Db4oEmbedded.openFile(config, Paths.get("Databank.db4o").toAbsolutePath().toString());
             return db;
         } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("here");
             System.out.print(ex.getMessage());
         }
         return null;

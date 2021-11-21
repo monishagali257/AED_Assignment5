@@ -6,6 +6,7 @@
 package Business.Restaurant;
 
 import Business.Organization;
+import Business.Role.RestaurantAdminRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -13,23 +14,16 @@ import java.util.ArrayList;
  *
  * @author harold
  */
-public class Restaurant {
-           private String Resname;
-
-    Restaurant(String Name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+public class Restaurant  extends Organization{
+      public Restaurant() {
+        super(Organization.Type.RestaurantAdmin.getValue());
     }
-
-    public String getResname() {
-        return Resname;
-    }
-
-    public void setResname(String Resname) {
-        this.Resname = Resname;
-    }
-          
     
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new RestaurantAdminRole());
+        return roles;
+    }
 
-   
-    
 }

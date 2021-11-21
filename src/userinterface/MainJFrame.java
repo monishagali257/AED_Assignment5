@@ -6,12 +6,14 @@ package userinterface;
 
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.Enterprise.Enterprise;
 
 import Business.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.SystemAdminWorkArea.CreateNewCustomerJPanel;
 
 /**
  *
@@ -24,11 +26,14 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+   private  Organization organization;
 
     public MainJFrame() {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
+       // this.organization=system.getCustomerDirectory().searchOrganization("Customer") ;
+       
     }
 
     /**
@@ -49,6 +54,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         loginJLabel = new javax.swing.JLabel();
         logoutJButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,6 +63,12 @@ public class MainJFrame extends javax.swing.JFrame {
         loginJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginJButtonActionPerformed(evt);
+            }
+        });
+
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
             }
         });
 
@@ -72,6 +84,13 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Sign up");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -84,12 +103,14 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(userNameJTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(logoutJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1)
+                                .addComponent(logoutJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
                             .addGap(26, 26, 26)
                             .addComponent(loginJLabel)))
                     .addComponent(loginJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +129,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(logoutJButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginJLabel)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(144, 144, 144))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -123,6 +146,91 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         // Get user name
+         // Get user name
+        String userName = userNameJTextField.getText();
+        // Get Password
+        char[] passwordCharArray = passwordField.getPassword();
+        String password = String.valueOf(passwordCharArray);
+        
+        //Step1: Check in the system admin user account directory if you have the user
+        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+        
+        Enterprise inEnterprise=null;
+        Organization inOrganization=null;
+        
+        if(userAccount==null){
+            //Step 2: Go inside each network and check each enterprise
+           // for(Network network:system.getNetworkList()){
+                //Step 2.a: check against each enterprise
+                for(Enterprise enterprise:system.getEnterpriseDirectory().getEnterpriseList())
+                {
+                    //userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+                    if(userAccount==null)
+                    {
+                       //Step 3:check against each organization for each enterprise
+                       for(Organization organization:enterprise.getRestaurantDirectory().getOrganizationList())
+                       {
+                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                           if(userAccount!=null)
+                           {
+                               inEnterprise=enterprise;
+                               inOrganization=organization;
+                               break;
+                           }
+                       }
+                    }
+                    
+                    else{
+                       inEnterprise=enterprise;
+                       break;
+                    }
+                    if(inOrganization!=null){
+                        break;
+                    }  
+                }
+        }
+        
+       // step-3 --to check for customer users
+       
+        if(userAccount==null){
+           for(Organization organization:system.getCustomerDirectory().getOrganizationList())
+                       {
+                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                           if(userAccount!=null)
+                           {
+                               inOrganization=organization;
+                               break;
+                           }
+                       }
+        }
+         //step-4--to check for deliver users
+               if(userAccount==null){
+           for(Organization organization:system.getDeliveryManDirectory().getOrganizationList())
+                       {
+                           userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                           if(userAccount!=null)
+                           {
+                               inOrganization=organization;
+                               break;
+                           }
+                       }
+        }
+        
+        if(userAccount==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        else{
+            CardLayout layout=(CardLayout)container.getLayout();
+            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            layout.next(container);
+        }
+        
+        loginJButton.setEnabled(false);
+        logoutJButton.setEnabled(true);
+        userNameJTextField.setEnabled(false);
+        passwordField.setEnabled(false);
+        
        
     }//GEN-LAST:event_loginJButtonActionPerformed
 
@@ -142,6 +250,27 @@ public class MainJFrame extends javax.swing.JFrame {
         crdLyt.next(container);
         dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_logoutJButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       
+        Organization custOrg= (Organization)system.getCustomerDirectory().searchOrganization("Customer");
+        Organization organization5;
+        if(custOrg==null){
+         organization5=(Organization)system.getCustomerDirectory().createOrganization(Organization.Type.Customer);
+        }
+        else{
+            organization5=custOrg;
+        }
+        
+         CardLayout layout=(CardLayout)container.getLayout();
+            container.add(new CreateNewCustomerJPanel(container,system,organization5));
+            layout.next(container);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +308,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel container;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
