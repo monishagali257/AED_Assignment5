@@ -51,6 +51,7 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         enterpriseLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(179, 55, 113));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         requestTestJButton.setText("Request Test");
@@ -65,13 +66,13 @@ public class RequestLabTestJPanel extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 40, -1, -1));
         add(messageJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 37, 89, -1));
 
-        backJButton.setText("<<Back");
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 138, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, -1, -1));
 
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 130, -1));

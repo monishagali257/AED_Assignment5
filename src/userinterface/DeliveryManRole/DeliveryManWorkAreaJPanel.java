@@ -82,7 +82,8 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
 
-        setLayout(new AbsoluteLayout());
+        setBackground(new java.awt.Color(179, 55, 113));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         processJButton.setText("Order Delivered");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +91,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new AbsoluteConstraints(446,215,-1,-1));
+        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +99,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new AbsoluteConstraints(406,26,-1,-1));
+        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 26, -1, -1));
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,7 +129,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        add(jScrollPane1, new AbsoluteConstraints(108,58,375,96));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 58, 710, 96));
     }// </editor-fold>//GEN-END:initComponents
 
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed

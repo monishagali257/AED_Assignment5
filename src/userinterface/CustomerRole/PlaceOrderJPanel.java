@@ -85,6 +85,8 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         customerNotesTxt = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(179, 55, 113));
+
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -170,7 +172,7 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(243, 243, 243)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(refreshTestJButton)
                 .addGap(162, 162, 162))
             .addGroup(layout.createSequentialGroup()
@@ -188,11 +190,6 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(RestaurantComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jButton3)
-                        .addGap(138, 138, 138)
-                        .addComponent(enterpriseLabel))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +197,13 @@ public class PlaceOrderJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(customerNotesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(86, 86, 86))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(enterpriseLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

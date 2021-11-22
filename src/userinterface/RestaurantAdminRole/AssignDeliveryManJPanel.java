@@ -69,6 +69,7 @@ public class AssignDeliveryManJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         deliveryManComboBox = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(179, 55, 113));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         requestdeliveryJButton.setText("Request delivery");
@@ -82,13 +83,13 @@ public class AssignDeliveryManJPanel extends javax.swing.JPanel {
         jLabel1.setText("Deliver man :");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 40, -1, -1));
 
-        backJButton.setText("<<Back");
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 138, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(301, 180, 80, -1));
 
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 130, -1));

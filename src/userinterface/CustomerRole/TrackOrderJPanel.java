@@ -99,6 +99,7 @@ public class TrackOrderJPanel extends javax.swing.JPanel {
         feedbackTxt = new javax.swing.JTextField();
         ConfirmOrderBtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(179, 55, 113));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         orderHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,10 +143,10 @@ public class TrackOrderJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 30, -1, -1));
 
         jLabel1.setText("Current Orders");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 44, 110, 30));
 
         CurrentOrdersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

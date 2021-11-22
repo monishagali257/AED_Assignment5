@@ -81,6 +81,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         ItemsListTable = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(179, 55, 113));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         orderRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -125,7 +126,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 26, -1, -1));
+        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 390, -1, -1));
 
         BtnDeliverOrder.setText("Assign Order to Delivery man");
         BtnDeliverOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -135,13 +136,13 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         });
         add(BtnDeliverOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, -1, -1));
 
-        AcceptOrderBtn.setText("Accept Order");
+        AcceptOrderBtn.setText("Accept the Order");
         AcceptOrderBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AcceptOrderBtnActionPerformed(evt);
             }
         });
-        add(AcceptOrderBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
+        add(AcceptOrderBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
 
         jButton1.setText("back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +150,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         viewItemsBtn.setText("View Items");
         viewItemsBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +158,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 viewItemsBtnActionPerformed(evt);
             }
         });
-        add(viewItemsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
+        add(viewItemsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
 
         ItemsListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
